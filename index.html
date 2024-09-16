@@ -21,6 +21,7 @@
 
     <title>Cardapio Digital</title>
 </head>
+<a href="admin.html" target="_blank">Painel ADM</a>
 <body>
     <header class="w-full h-[420px] bg-zinc-900 bg-home bg-cover bg-center">
         <div class="w-full h-full flex flex-col justify-center items-center">
@@ -319,6 +320,29 @@
     <script src="script.js"></script>
     <script src="admin.js"></script>
     <script src="index.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const updateVisibility = () => {
+                const items = document.querySelectorAll('.menu-item'); // Seleciona todos os itens do menu
+                items.forEach(item => {
+                    const state = localStorage.getItem(item.id);
+                    if (state === 'hidden') {
+                        item.classList.add('hidden');
+                    } else {
+                        item.classList.remove('hidden');
+                    }
+                });
+            };
+
+            updateVisibility(); // Atualiza a visibilidade na carga inicial
+
+            window.addEventListener('storage', (event) => {
+                if (event.key && (event.key === 'hamb-smash' || event.key === 'hamb-duplo')) {
+                    updateVisibility(); // Atualiza a visibilidade quando o storage muda
+                }
+            });
+        });
+    </script>
     
     
 </body>
