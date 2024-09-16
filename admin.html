@@ -4,23 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel de Administração</title>
-    <link rel="stylesheet" href="styles/admin.css">
+    <style>
+        .hidden { display: none; }
+    </style>
 </head>
 <body>
     <h1>Painel de Administração</h1>
     
-    <div>
-        <label>
-            <input type="checkbox" data-item="hamb-smash" class="toggle-item">
-            Ocultar Hamburguer Smash
-        </label>
-
-        <label>
-            <input type="checkbox" data-item="hamb-duplo" class="toggle-item">
-            Ocultar Hamburguer Duplo
-        </label>
-    </div>
+    <!-- Botões para ocultar/mostrar itens -->
+    <button class="toggle-visibility" data-target="hamb-smash">Alternar Hamburguer Smash</button>
+    <button class="toggle-visibility" data-target="hamb-duplo">Alternar Hamburguer Duplo</button>
+    <!-- Adicione mais botões conforme necessário -->
     
-    <script src="admin.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const buttons = document.querySelectorAll('.toggle-visibility'); // Seleciona os botões de ocultar/mostrar
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const itemId = button.getAttribute('data-target'); // Obtém o id do item
+                    const currentState = localStorage.getItem(itemId);
+                    if (currentState === 'hidden') {
+                        localStorage.setItem(itemId, 'visible');
+                    } else {
+                        localStorage.setItem(itemId, 'hidden');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
